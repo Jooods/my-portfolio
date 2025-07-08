@@ -486,7 +486,7 @@
         <div class="skills">
             <div class="skill-card" id="project1" data-project-title="E-commerce Website"
                 data-project-description="Overview<br><br>Amigo Clothing Co. is a modern e-commerce website developed by a team of Information Technology students from Eulogio Amang Rodriguez Institute of Science & Technology (EARIST). The platform serves as an innovative online marketplace specializing in custom clothing designs, with a primary focus on shirts featuring unique and appealing designs.<br><br>Target Audience<br><br>The website caters to a broad demographic, primarily targeting customers aged 16-40, though it welcomes users of all ages. The platform is designed to be accessible to anyone interested in trendy, quality clothing designs without age restrictions."
-                data-project-tech="HTML, MySQL, PHP, JavaScript, CSS"
+                data-project-tech="HTML, JavaScript, CSS, Firebase, Cloudinary"
                 data-project-image="assets/330713680_5830076340380290_4332100164337479901_n (online-video-cutter.com).gif">
                 <h3>Amigo Clothing</h3>
                 <p>A e-commerce platform with user authentication, product catalog, and payment integration.
@@ -523,7 +523,7 @@
     <section>
 
         <h2>Certifications</h2>
-        <p>Certification verifying proficiency and applied understanding of industry-relevant topics.</p>
+        <p>I craft and build across different platforms from the browser to your phone, and up to the cloud.</p>
 
            
         <a href="https://www.credly.com/badges/db164db8-4bb8-4fc4-946a-37fbc56e57e1/public_url" target = "_blank" class="certification-link">
@@ -532,14 +532,14 @@
         <a href="https://www.credly.com/badges/cca94865-6108-47e7-abac-7eedbe59973f/public_url" target = "_blank" class="certification-link">
             <img src="assets/make-foundation.1.png" height="165px">
         </a>
-        <a href="https://www.credly.com/badges/faf8310f-90f1-4dba-8fb9-8a49482b931e/public_url"  target = "_blank" class="certification-link">
+        <a href="https://www.credly.com/badges/faf8310f-90f1-4dba-8fb9-8a49482b931e/public_url" target = "_blank" class="certification-link">
             <img src="assets/make-intermediate.png" height="165px">
         </a>
         <a href="https://www.credly.com/badges/d754852b-ccb1-45ec-a2cf-ce5ef86385b4/public_url" target = "_blank" class="certification-link">
-            <img src="assets/make-advanced.png" height="165px">
+            <img src="assets/make-advanced.png" height="165px"> 
         </a>
         <a href="http://verify.skilljar.com/c/4i5mjfbikjxj" target = "_blank" class="certification-link">
-            <img src="assets/Screenshot 2025-07-02 141648.png" target = "_blank" height="165px">
+            <img src="assets/Screenshot 2025-07-02 141648.png" height="165px">
         </a>
         <a href="http://verify.skilljar.com/c/3dxvxwv4djh8" target = "_blank" class="certification-link">
             <img src="assets/Screenshot 2025-07-02 141713.png" height="165px">
@@ -613,6 +613,9 @@
                 <p id="modalDescription"></p>
                 <h3>Technologies Used:</h3>
                 <p id="modalTech"></p>
+                <a id="modalVisitBtn" href="#" target="_blank" style="display:none;">
+                    <button style="margin-top:20px; background:#007bff; color:white; border:none; padding:10px 24px; border-radius:6px; font-size:18px; cursor:pointer;">Visit Page</button>
+                </a>
             </div>
         </div>
     </div>
@@ -655,6 +658,16 @@
                 modalDescription.innerHTML = description;
                 modalTech.textContent = tech;
                 modalImage.src = image;
+
+                // Show Visit Page button only for Project 1
+                const visitBtn = document.getElementById('modalVisitBtn');
+                if (this.id === 'project1') {
+                    visitBtn.style.display = 'inline-block';
+                    visitBtn.href = 'https://jooods.github.io/amigoclothing/'; // <-- Replace with actual URL
+                } else {
+                    visitBtn.style.display = 'none';
+                    visitBtn.href = '#';
+                }
 
                 modal.style.display = 'block';
             });
