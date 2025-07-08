@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Portfolio</title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <div id="particles-js"></div>
+
+    <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+        }
+
+        body {
+            font-family: 'lato';
+            font-weight: bold;
+            margin: 0;
+            background: black;
+            color: #333;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        header {
+
+            color: white;
+            padding: 320px 20px;
+            text-align: left;
+            margin-left: 100px;
+        }
+
+        h1 {
+            font-family: 'Bjorn';
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+        }
+
+        h2 {
+            font-family: 'lato';
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        @font-face {
+            font-family: 'Bjorn';
+            src: url('font/Bjorn Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'lato';
+            src: url('font/Lato-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        section {
+            padding: 10px 10px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .skills {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .skill-card {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-width: 250px;
+            text-align: center;
+            color: #333;
+            opacity: 0.6;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .skill-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .projects,
+        .contact-form {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            color: #333;
+            opacity: 0.6;
+        }
+
+        .about {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .about img {
+            width: 300px;
+            height: auto;
+            border-radius: 20px;
+            border: 3px solid white;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'lato', Arial, sans-serif;
+            text-align: center;
+            display: block;
+            width: 20%;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: black;
+            color: white;
+        }
+
+        lottie-player {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+        .social-links img {
+            filter: grayscale(100%);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .social-links a:hover img {
+            transform: scale(1.2);
+            filter: grayscale(0%);
+        }
+
+        .vertical-line {
+            position: absolute;
+            left: 50px;
+            top: 0;
+            width: 2px;
+            height: 80%;
+            background: linear-gradient(to bottom, transparent, white, transparent);
+            z-index: 100;
+        }
+
+        .header-gif {
+            position: absolute;
+            left: 25px;
+            bottom: 50px;
+            width: 50px;
+            height: auto;
+            z-index: 99;
+        }
+
+        .projects-gif {
+            position: absolute;
+            left: 1350px;
+            bottom: -950px;
+            width: 60px;
+            height: auto;
+            z-index: 99;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+
+            header {
+                padding: 150px 10px;
+                margin-left: 20px;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 35px;
+                letter-spacing: 2px;
+            }
+
+            h2 {
+                font-size: 25px;
+                letter-spacing: 1.5px;
+            }
+
+            section {
+                padding: 20px 10px;
+                max-width: 100%;
+            }
+
+            .skills {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .skill-card {
+                min-width: auto;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .skill-card img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .about {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .about img {
+                width: 250px;
+                margin: 0 auto;
+            }
+
+            .vertical-line {
+                left: 20px;
+                height: 60%;
+            }
+
+            .header-gif {
+                left: 15px;
+                bottom: 30px;
+                width: 40px;
+            }
+
+            .projects-gif {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -800px;
+                width: 50px;
+            }
+
+            lottie-player {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 300px !important;
+                height: 300px !important;
+                margin: 20px auto;
+                display: block;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+
+            .modal-content img {
+                max-width: 100%;
+            }
+
+            form button {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .social-links {
+                gap: 20px !important;
+            }
+
+            .social-links img {
+                width: 35px !important;
+                height: 35px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 100px 5px;
+                margin-left: 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            .about img {
+                width: 200px;
+            }
+
+            .vertical-line {
+                left: 10px;
+                height: 50%;
+            }
+
+
+            lottie-player {
+                width: 250px !important;
+                height: 250px !important;
+            }
+        }
+
+        .certification-link img {
+            padding: 18px 24px;
+            background: none;
+            border-radius: 12px;
+            box-sizing: border-box;
+            display: inline-block;
+        }
+        .certification-link {
+            text-decoration: none !important;
+            border-bottom: none !important;
+        }
+        .certification-link:focus,
+        .certification-link:active {
+            outline: none;
+            border-bottom: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="vertical-line"></div>
+
+
+
+
+        <h1>Peter Joedale Daling</h1>
+        <p>Junior Software Engineer</p>
+        <lottie-player id="logo" src="logo.json" background="transparent" speed="1" style="width: 800px; height: 800px;"
+            autoplay="false" loop="false">
+        </lottie-player>
+
+    </header>
+
+    <section>
+
+        <h2>What I Do</h2>
+        <p>I craft and build across different platforms from the browser to your phone, and up to the cloud.</p>
+        <div class="skills">
+            <div class="skill-card">
+                <img src="assets/development.png">
+                <h3>Web-Based App</h3>
+                <p>Developing responsive websites and dynamic web applications using HTML, CSS, JavaScript.</p>
+            </div>
+            <div class="skill-card">
+                <img src="assets/mobile-development.png">
+                <h3>Mobile Development</h3>
+                <p>Building cross-platform mobile apps using technologies like React Native or Unity, ensuring seamless
+                    experiences on Android and iOS.</p>
+            </div>
+            <div class="skill-card">
+                <img src="assets/cloud-service.png">
+                <h3>Cloud Deployment</h3>
+                <p>Deploying scalable applications to the cloud using platforms like Firebase, and integrating CI/CD
+                    workflows.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+
+        <h2>Projects (Tap It!)</h2>
+        <div class="skills">
+            <div class="skill-card" id="project1" data-project-title="E-commerce Website"
+                data-project-description="Overview<br><br>Amigo Clothing Co. is a modern e-commerce website developed by a team of Information Technology students from Eulogio Amang Rodriguez Institute of Science & Technology (EARIST). The platform serves as an innovative online marketplace specializing in custom clothing designs, with a primary focus on shirts featuring unique and appealing designs.<br><br>Target Audience<br><br>The website caters to a broad demographic, primarily targeting customers aged 16-40, though it welcomes users of all ages. The platform is designed to be accessible to anyone interested in trendy, quality clothing designs without age restrictions."
+                data-project-tech="HTML, JavaScript, CSS, Firebase, Cloudinary"
+                data-project-image="assets/330713680_5830076340380290_4332100164337479901_n (online-video-cutter.com).gif">
+                <h3>Amigo Clothing</h3>
+                <p>A e-commerce platform with user authentication, product catalog, and payment integration.
+                </p>
+            </div>
+            <div class="skill-card" id="project2" data-project-title="Arduino Hardware"
+                data-project-description="Project Overview<br><br>
+                The Arduino Pet Feeder is an innovative automated feeding system. This intelligent device serves as a programmable food dispenser that ensures pets receive their meals at precisely scheduled times, providing pet owners with peace of mind and consistent pet care.
+                <br><br>
+                Project Concept<br><br>
+                The Pet Feeder functions as a magical food dispenser that combines Arduino smart programming capabilities with mechanical components to create a reliable, automated feeding solution. The system eliminates the worry of missed feeding times and helps prevent pet overeating through controlled portion dispensing."
+                data-project-tech="C/C ++, Arduino" data-project-image="assets/Picture1.png">
+                <h3>Pet Feeder</h3>
+                <p>An automated Arduino-based pet feeder that dispenses food at scheduled times to ensure consistent
+                    feeding for your pet.</p>
+            </div>
+            <div class="skill-card" id="project3" data-project-title="Trading Mobile Application"
+                data-project-description="Overview<br><br>The 3R Interactive Waste Management App is a comprehensive digital solution designed to revolutionize how communities approach recycling and waste management. This innovative mobile application combines environmental consciousness with modern technology to create a sustainable ecosystem that benefits both users and the environment.<br><br>Core Concept<br><br>The app is built around the fundamental principle of the 3Rs - Reduce, Reuse, and Recycle - encouraging users to minimize waste generation, repurpose items, and properly recycle materials. By combining environmental responsibility with digital innovation, the 3R app creates a sustainable ecosystem that benefits both users and the community.<br><br>Key Features<br><br>Gamified Experience<br><br>Points-based Rewards System: Users earn points for every recycling activity, creating motivation through tangible incentives<br>Leaderboards: Friendly competition among community members to encourage consistent participation<br><br>Educational Platform<br><br><br> Waste Classification Guide: Interactive tutorials on proper waste segregation techniques<br>Environmental Awareness Content: Information about the importance of recycling and its impact on the environment<br>Best Practices: Tips and guidelines for effective waste reduction and management at home<br><br>User-Friendly Interface<br><br><br>Intuitive Navigation: Clean, simple design accessible to users of all ages and technical backgrounds<br>QR Code Scanning: Easy submission of recyclables through QR code scanning at designated facilities<br>Profile Management: Personal dashboard showing recycling history, earned points, and achievements<br><br>Rewards Marketplace<br><br><br>Point Redemption System: Trade accumulated points for goods, vouchers, or relief items<br>Community-Based Rewards: Items available based on beneficiary standards set by the local barangay<br>Secure Transactions: Reference ID system ensures safe and verified reward claims<br><br>Administrative Tools<br><br><br>User Management: Comprehensive oversight of user accounts and activities<br>System Reliability: Built-in fault tolerance and recovery mechanisms for uninterrupted service"
+                data-project-tech="ReactJS, Firebase, Expo"
+                data-project-image="assets/5a026b33-24cc-4073-8a62-cb6fa76e2e12.gif">
+                <h3>3R: Interactive Waste Management App</h3>
+                <p>A digital system that manages user-earned points and enables their conversion into tangible goods
+                    through a reward-based exchange.</p>
+            </div>
+            <div class="skill-card" id="project4" data-project-title="3D Model Mobile Application"
+                data-project-description="Overview<br><br>EA SHRINE is an innovative 3D mobile simulation application that brings the historic Emilio Aguinaldo Shrine to life through immersive digital technology. Built using Unity and C#, this educational app allows users to virtually explore the iconic two-story house and interact with historical artifacts, creating an engaging learning experience about Philippine history and the life of the country's first president.<br><br>Core Concept<br><br>The application transforms the traditional museum experience into an interactive, accessible digital format. Users can freely navigate through the meticulously recreated Emilio Aguinaldo Shrine, examining historical artifacts and learning about their significance through detailed descriptions, all from the convenience of their mobile devices.<br><br>Key Features<br><br>Immersive 3D Environment<br><br><br> Authentic Recreation: Detailed 3D modeling of the actual Emilio Aguinaldo Shrine's exterior and interior<br>Two-Story Exploration: Complete access to both floors of the historic house<br>Realistic Architecture: Accurate representation of the building's colonial-era design and layout<br>Atmospheric Details: Historically appropriate lighting, textures, and environmental elements<br><br>Interactive Navigation<br><br><br> Mobile-Optimized Controls: User-friendly touch controls designed specifically for mobile devices<br>Free Movement: Intuitive controller system allowing users to move freely throughout the shrine<br>Smooth Navigation: Seamless transition between rooms and floors<br> First-Person Perspective: Immersive viewpoint that simulates actual walking through the shrine<br><br>Artifact Interaction System<br><br><br> Clickable Artifacts: Tap-to-interact functionality with historical objects and displays<br>  Detailed Descriptions: Comprehensive information about each artifact's historical significance<br> Educational Content: Rich contextual information about the items' connection to Emilio Aguinaldo and Philippine history<br>Visual Highlighting: Clear indication of interactive elements within the environment<br><br>Educational Experience<br><br><br>Historical Learning: Deep dive into the life and times of Emilio Aguinaldo<br> Cultural Heritage: Exploration of Filipino historical artifacts and their meanings<br>Self-Paced Discovery: Users can explore at their own speed without time constraints<br>Accessibility: Educational content available to anyone with a mobile device<br><br>Technical Specifications<br><br>Platform Details<br><br><br>Mobile Exclusive: Optimized specifically for mobile devices (Android and iOS)<br>Unity Engine: Built using Unity 3D for robust performance and cross-platform compatibility<br>C# Programming: Developed with C# for efficient functionality and smooth user interactions<br>Touch Interface: Designed for touchscreen navigation and interaction<br><br>Performance Features<br><br><br>Mobile Optimization: Carefully optimized 3D models and textures for mobile hardware<br>Efficient Rendering: Balanced visual quality with performance for various mobile devices<br>Responsive Controls: Immediate response to user input and navigation commands<br>Stable Performance: Consistent frame rates and smooth operation across different mobile specifications"
+                data-project-tech="Unity, C#" data-project-image="assets/abfec88b-39be-4390-bde2-39b8cfb8c430.gif">
+                <h3>EA SHRINE: Emilio Aguinaldo Shrine Virtual Tour</h3>
+                <p>A fully modeled 3D model showcasing both the exterior architecture and detailed interior layout for
+                    design visualization and spatial planning. for exploration or simulation.</p>
+            </div>
+        </div>
+    </section>
+    <section>
+
+        <h2>Certifications</h2>
+        <p>I craft and build across different platforms from the browser to your phone, and up to the cloud.</p>
+
+           
+        <a href="https://www.credly.com/badges/db164db8-4bb8-4fc4-946a-37fbc56e57e1/public_url" target = "_blank" class="certification-link">
+            <img src="assets/make-basics.png" height="165px">
+        </a>
+        <a href="https://www.credly.com/badges/cca94865-6108-47e7-abac-7eedbe59973f/public_url" target = "_blank" class="certification-link">
+            <img src="assets/make-foundation.1.png" height="165px">
+        </a>
+        <a href="https://www.credly.com/badges/faf8310f-90f1-4dba-8fb9-8a49482b931e/public_url" target = "_blank" class="certification-link">
+            <img src="assets/make-intermediate.png" height="165px">
+        </a>
+        <a href="https://www.credly.com/badges/d754852b-ccb1-45ec-a2cf-ce5ef86385b4/public_url" target = "_blank" class="certification-link">
+            <img src="assets/make-advanced.png" height="165px"> 
+        </a>
+        <a href="http://verify.skilljar.com/c/4i5mjfbikjxj" target = "_blank" class="certification-link">
+            <img src="assets/Screenshot 2025-07-02 141648.png" height="165px">
+        </a>
+        <a href="http://verify.skilljar.com/c/3dxvxwv4djh8" target = "_blank" class="certification-link">
+            <img src="assets/Screenshot 2025-07-02 141713.png" height="165px">
+        </a>
+    
+
+
+    </section>
+
+    <section class="about">
+        <img src="assets/Screenshot 2025-06-30 035520.png" alt="Your Photo">
+        <div>
+            <h2>About Me</h2>
+            <p>My background lies in ensuring a cohesive and enriching user experience from conception to deployment and
+                beyond. I have experience managing complex business logic, organizing detailed project timelines,
+                milestones, and deadlines to ensure smooth and successful execution with high code quality and
+                functionality.
+
+                I firmly believe that collaboration is the key to success. With my ability to communicate effectively
+                and work with others toward shared goals, I'm committed to contributing wherever innovation and
+                productivity can thrive for the benefit of both the team and the company.</p>
+        </div>
+    </section>
+
+    <section class="contact-form">
+        <h2>Thinking of creating something?</h2>
+        <p>Let's make the world a better place, one line of code at a time.</p>
+        <form onsubmit="sendEmail(event)">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" placeholder="Your message here..." required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+
+    <section style="text-align: center; padding: 40px 20px; background: black;">
+        <h2 style="color: white; margin-bottom: 30px;">Connect With Me</h2>
+        <div class="social-links" style="display: flex; justify-content: center; gap: 30px;">
+            <a href="https://www.facebook.com/ledooj/" target="_blank" style="text-decoration: none;">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook"
+                    style="width: 40px; height: 40px; transition: transform 0.3s ease;">
+            </a>
+            <a href="https://www.linkedin.com/in/ledooj/" target="_blank" style="text-decoration: none;">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968803.png" alt="LinkedIn"
+                    style="width: 40px; height: 40px; transition: transform 0.3s ease;">
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Peter Joedale Daling — All rights reserved.
+    </footer>
+
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <img id="modalImage" src="" alt="Project Image"
+                    style="width: 100%; max-width: 400px; height: auto; margin: 20px auto; border-radius: 10px; display: block;">
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription"></p>
+                <h3>Technologies Used:</h3>
+                <p id="modalTech"></p>
+                <a id="modalVisitBtn" href="#" target="_blank" style="display:none;">
+                    <button style="margin-top:20px; background:#007bff; color:white; border:none; padding:10px 24px; border-radius:6px; font-size:18px; cursor:pointer;">Visit Page</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const logo = document.getElementById('logo');
+
+        logo.addEventListener('load', () => {
+            logo.seek(66);
+            logo.pause();
+        });
+
+        logo.addEventListener('mouseenter', () => {
+            logo.stop();
+            logo.play();
+        });
+
+        logo.addEventListener('mouseleave', () => {
+            logo.play();
+            logo.seek(66);
+        });
+
+
+        const modal = document.getElementById('projectModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalTech = document.getElementById('modalTech');
+        const modalImage = document.getElementById('modalImage');
+
+
+        document.querySelectorAll('.skill-card[id^="project"]').forEach(card => {
+            card.addEventListener('click', function () {
+                const title = this.getAttribute('data-project-title');
+                const description = this.getAttribute('data-project-description');
+                const tech = this.getAttribute('data-project-tech');
+                const image = this.getAttribute('data-project-image');
+
+                modalTitle.textContent = title;
+                modalDescription.innerHTML = description;
+                modalTech.textContent = tech;
+                modalImage.src = image;
+
+                // Show Visit Page button only for Project 1
+                const visitBtn = document.getElementById('modalVisitBtn');
+                if (this.id === 'project1') {
+                    visitBtn.style.display = 'inline-block';
+                    visitBtn.href = 'https://jooods.github.io/amigoclothing/'; // <-- Replace with actual URL
+                } else {
+                    visitBtn.style.display = 'none';
+                    visitBtn.href = '#';
+                }
+
+                modal.style.display = 'block';
+            });
+        });
+
+
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
+
+
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+            }
+        });
+
+        function sendEmail(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const subject = `Portfolio Contact from ${name}`;
+            const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+            const mailtoLink = `mailto:kalamasiledoj@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            window.open(mailtoLink);
+        }
+    </script>
+    <script>
+        tsParticles.load("particles-js", {
+            fullScreen: { enable: false },
+            background: {
+                color: "#000"
+            },
+            particles: {
+                number: {
+                    value: 200,
+                    density: {
+                        enable: true,
+                        area: 800
+                    }
+                },
+                color: {
+                    value: "#ffffff"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.6,
+                    random: true
+                },
+                size: {
+                    value: 1.5,
+                    random: true
+                },
+                move: {
+                    enable: true,
+                    speed: 0.3,
+                    direction: "none",
+                    outModes: {
+                        default: "out"
+                    }
+                }
+            },
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: false
+                    },
+                    onClick: {
+                        enable: false
+                    }
+                }
+            },
+            detectRetina: true
+        });
+    </script>
+
+</body>
+
+</html>
